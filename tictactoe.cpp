@@ -72,7 +72,7 @@ int main()
         cout << '\n';
         if ((first[0] == first[1] && first[1] == first[2] && first[0] != ' ') || 
             (second[0] == second[1] && second[1] == second[2] && second[1] != ' ') || 
-            (third[0] == third[1] && third[1] == third[1] && third[1] != ' ') || 
+            (third[0] == third[1] && third[1] == third[2] && third[1] != ' ') || 
             (first[0] == second[0] && second[0] == third[0] && first[0] != ' ') || 
             (first[1] == second[1] && second[1] == third[1] && second[1] != ' ') || 
             (first[2] == second[2] && second[2] == third[2] && second[2] != ' ') || 
@@ -83,15 +83,15 @@ int main()
             prnt(num, line, middle, first, second, third);
             cout << "player " << turn << " won\n";
         }
+        else if (turn == 'x')
+            turn = 'o';
+        else turn = 'x';
         c++;
         if (c == 9) {
             prnt(num, line, middle, first, second, third);
             cout << "tie\n";
             break;
         }
-        else if (turn == 'x')
-            turn = 'o';
-        else turn = 'x';
     }
 
     //      1   2   3
