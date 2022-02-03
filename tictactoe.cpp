@@ -1,69 +1,56 @@
 #include <iostream>
 using namespace std;
 
-string num = "     1   2   3";
-string line = "    -----------";
-string middle = "   | - + - + - |";
-
-void prnt(char f[3], char s[3], char t[3]) 
+void prnt(char b[3][3]) 
 {
     cout << 
-    num << '\n' << 
-    line << '\n' << 
-    " a | " << f[0] << " | " << f[1] << " | " << f[2] << " |" << '\n' << 
-    middle << '\n' << 
-    " b | " << s[0] << " | " << s[1] << " | " << s[2] << " |" << '\n' << 
-    middle << '\n' <<
-    " c | " << t[0] << " | " << t[1] << " | " << t[2] << " |" << '\n' << 
-    line << '\n' << '\n';
+    "     1   2   3" << '\n' << 
+    "    -----------" << '\n' << 
+    " a | " << b[0][0] << " | " << b[0][1] << " | " << b[0][2] << " |" << '\n' << 
+    "   | - + - + - |" << '\n' << 
+    " b | " << b[1][0] << " | " << b[1][1] << " | " << b[1][2] << " |" << '\n' << 
+    "   | - + - + - |" << '\n' <<
+    " c | " << b[2][0] << " | " << b[2][1] << " | " << b[2][2] << " |" << '\n' << 
+    "    -----------" << '\n' << '\n';
 }
 
-int flag = 0;
-
-void change(char f[3], char s[3], char t[3], char let, char number, char turn) {
-    if (let == 'a') {
-        if (f[number - 1] == ' ') {
-            f[number - 1] = turn;
-            flag = 1;
-        }
+bool change(char b[3][3], char let, char num, char turn) 
+{
+    int row = let - 'a';
+    int col = num - '1';
+    if (b[row][col] == ' ') {
+        b[row][col] = turn;
+        return true;
     }
-    else if (let == 'b') {
-        if (s[number - 1] == ' ') {
-            s[number - 1] = turn;
-            flag = 1;
-        }
-    }
-    else if (let == 'c') {
-        if (t[number - 1] == ' ') {
-            t[number - 1] = turn;
-            flag = 1;
-        }
-    }
+    return false;
 }
 
 int main()
 {
-    char first[] =  "   ";
-    char second[] = "   ";
-    char third[] = "   ";
-
-    cout << "\ninput format: \"a 1\" if you wish to place your sign in the upper left corner\n\n";
+    char board[3][3];
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            board[i][j] = ' ';
+        }
+    }
+    cout << "\ninput format: \"a1\" if you wish to place your sign in the upper left corner\n\n";
 
     char win = ' ';
-    char letter; 
-    int number;
-    string inp;
+    string input;
     char turn = 'x';
     int turns = 0;
     while (win == ' ') {
-        prnt(first, second, third);
+        prnt(board);
         while (true) {
             cout << "player " << turn << "'s turn. input coordinates of desired turn: ";
-            cin >> letter >> number;
-            if ((letter == 'a' || letter == 'b' ||letter == 'c') && (number == 1 || number == 2 || number == 3)) {
-                change (first, second, third, letter, number, turn);
-                if (flag == 1) {
-                    flag = 0;
+            cin >> input;
+            if (input.length() != 2) {
+                cout << "\ndont try to break the program #3\n";
+            }
+            char letter = input[0];
+            char number = input[1];
+            if ((letter == 'a' || letter == 'b' ||letter == 'c') && (number == '1' || number == '2' || number == '3')) {
+                if (change(board, letter, number, turn)) {
                     break;
                 }
                 else cout << "\ndont try to break the program #2\n";
@@ -71,6 +58,9 @@ int main()
             else cout << "\ndont try to break the program\n";
         }
         cout << '\n';
+        char* first = board[0];
+        char* second = board[1];
+        char* third = board[2];
         if ((first[0] == first[1] && first[1] == first[2] && first[0] != ' ') || 
             (second[0] == second[1] && second[1] == second[2] && second[1] != ' ') || 
             (third[0] == third[1] && third[1] == third[2] && third[1] != ' ') || 
@@ -81,7 +71,7 @@ int main()
             (first[2] == second[1] && second[1] == third[0] && second[1] != ' ')) 
         {
             win = turn;
-            prnt(first, second, third);
+            prnt(board);
             cout << "player " << turn << " won\n";
         }
         else if (turn == 'x')
@@ -89,7 +79,7 @@ int main()
         else turn = 'x';
         turns++;
         if (turns == 9) {
-            prnt(first, second, third);
+            prnt(board);
             cout << "tie\n";
             break;
         }
