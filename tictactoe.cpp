@@ -1,15 +1,19 @@
 #include <iostream>
 using namespace std;
 
-void prnt(string num, string line, string mid, char f[3], char s[3], char t[3]) 
+string num = "     1   2   3";
+string line = "    -----------";
+string middle = "   | - + - + - |";
+
+void prnt(char f[3], char s[3], char t[3]) 
 {
     cout << 
     num << '\n' << 
     line << '\n' << 
     " a | " << f[0] << " | " << f[1] << " | " << f[2] << " |" << '\n' << 
-    mid << '\n' << 
+    middle << '\n' << 
     " b | " << s[0] << " | " << s[1] << " | " << s[2] << " |" << '\n' << 
-    mid << '\n' <<
+    middle << '\n' <<
     " c | " << t[0] << " | " << t[1] << " | " << t[2] << " |" << '\n' << 
     line << '\n' << '\n';
 }
@@ -39,9 +43,6 @@ void change(char f[3], char s[3], char t[3], char let, char number, char turn) {
 
 int main()
 {
-    string num = "     1   2   3";
-    string line = "    -----------";
-    string middle = "   | - + - + - |";
     char first[] =  "   ";
     char second[] = "   ";
     char third[] = "   ";
@@ -53,9 +54,9 @@ int main()
     int number;
     string inp;
     char turn = 'x';
-    int c = 0;
+    int turns = 0;
     while (win == ' ') {
-        prnt(num, line, middle, first, second, third);
+        prnt(first, second, third);
         while (true) {
             cout << "player " << turn << "'s turn. input coordinates of desired turn: ";
             cin >> letter >> number;
@@ -80,15 +81,15 @@ int main()
             (first[2] == second[1] && second[1] == third[0] && second[1] != ' ')) 
         {
             win = turn;
-            prnt(num, line, middle, first, second, third);
+            prnt(first, second, third);
             cout << "player " << turn << " won\n";
         }
         else if (turn == 'x')
             turn = 'o';
         else turn = 'x';
-        c++;
-        if (c == 9) {
-            prnt(num, line, middle, first, second, third);
+        turns++;
+        if (turns == 9) {
+            prnt(first, second, third);
             cout << "tie\n";
             break;
         }
