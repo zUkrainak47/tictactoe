@@ -61,14 +61,14 @@ int main()
         char* first = board[0];
         char* second = board[1];
         char* third = board[2];
-        if ((first[0] == first[1] && first[1] == first[2] && first[0] != ' ') || 
-            (second[0] == second[1] && second[1] == second[2] && second[1] != ' ') || 
-            (third[0] == third[1] && third[1] == third[2] && third[1] != ' ') || 
-            (first[0] == second[0] && second[0] == third[0] && first[0] != ' ') || 
-            (first[1] == second[1] && second[1] == third[1] && second[1] != ' ') || 
-            (first[2] == second[2] && second[2] == third[2] && second[2] != ' ') || 
-            (first[0] == second[1] && second[1] == third[2] && first[0] != ' ') || 
-            (first[2] == second[1] && second[1] == third[0] && second[1] != ' ')) 
+        if ((first[0] == first[1] && first[1] == first[2] && first[0] != ' ') ||
+            (second[0] == second[1] && second[1] == second[2] && second[1] != ' ') ||
+            (third[0] == third[1] && third[1] == third[2] && third[1] != ' ') ||
+            (first[0] == second[0] && second[0] == third[0] && first[0] != ' ') ||
+            (first[1] == second[1] && second[1] == third[1] && second[1] != ' ') ||
+            (first[2] == second[2] && second[2] == third[2] && second[2] != ' ') ||
+            (first[0] == second[1] && second[1] == third[2] && first[0] != ' ') ||
+            (first[2] == second[1] && second[1] == third[0] && second[1] != ' '))
         {
             win = turn;
             prnt(board);
@@ -96,4 +96,3 @@ int main()
 
     return 0;
 }
-
